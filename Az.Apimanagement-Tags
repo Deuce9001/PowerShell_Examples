@@ -1,0 +1,13 @@
+#https://www.powershellgallery.com/packages/Az.Resources/4.0.2-preview
+Install-Module -Name Az.Resources
+Import-Module Az.ApiManagement
+Connect-AzAccount
+Get-AzSubscription
+Set-AzContext -SubscriptionId ""
+
+$TagName = "tagName"
+$PropertiesObject = @{
+    displayName = "tagName"
+}
+New-AzResource -PropertyObject $PropertiesObject -ResourceGroupName "ResourceGroupName" -ResourceType Microsoft.ApiManagement/service/tags -ResourceName "APIM_service_name/$TagName" -ApiVersion 2018-01-01 -Force
+New-AzResource -ResourceGroupName "ResourceGroupName" -ResourceType Microsoft.ApiManagement/service/apis/tags -ResourceName "APIM_service_name/echo-api/$TagName" -ApiVersion 2018-01-01 -Force

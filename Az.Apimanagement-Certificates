@@ -1,3 +1,4 @@
+#https://www.powershellgallery.com/packages/Az.ApiManagement/2.1.0
 Install-Module -Name Az.ApiManagement -AllowClobber
 Import-Module Az.ApiManagement
 Connect-AzAccount

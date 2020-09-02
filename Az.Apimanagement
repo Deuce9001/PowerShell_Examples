@@ -1,0 +1,14 @@
+Install-Module -Name Az.ApiManagement -AllowClobber
+Import-Module Az.ApiManagement
+Connect-AzAccount
+Get-AzSubscription
+Set-AzContext -SubscriptionId ""
+$ApiMgmtContext = New-AzApiManagementContext -ResourceGroupName "MyResourceGroupName" -ServiceName "APIMname"
+
+#To add a CA certificate in APIM (in PowerShell it can only be done when creating the API Management Service)
+$rootCa = New-AzApiManagementSystemCertificate -StoreName "Root" -PfxPath "C:\certificateName.cer"
+$systemCert = @($rootCa)
+New-AzApiManagement -ResourceGroupName "ContosoGroup" -Location "West US" -Name "MyResourceGroupName" -Organization Contoso -AdminEmail admin@contoso.com -SystemCertificateConfiguration $systemCert
+
+#To add a certificate in APIM
+New-AzApiManagementCertificate -Context $ApiMgmtContext -PfxFilePath "C:\certificateName.pfx" -PfxPassword "MyPassword"
